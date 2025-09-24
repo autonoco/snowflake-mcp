@@ -1,22 +1,13 @@
-# tools_config.yaml
-# This is a convenience copy of services/configuration.yaml so that
-# container defaults (Dockerfile CMD) and remote deployments can use the
-# expected path `/app/services/tools_config.yaml` without changing the
-# original template file name.
+# Minimal tools configuration for Fly.io deployment
+# Exposes only the read-only Query Manager tool.
 
-agent_services: []
-
-search_services: []
-
-analyst_services: []
-
-other_services: # Enable only the query manager so the server can run queries
+other_services:
   object_manager: False
   query_manager: True
   semantic_manager: False
 
-sql_statement_permissions: # Allow read-only queries; block writes and DDL. Prevent USE to lock DB.
+# Permit only SELECT queries; block everything else by omission.
+# Keep Unknown: False to reject any unrecognized statement types.
+sql_statement_permissions:
   - Select: True
-  - Describe: True
-  - Use: False
   - Unknown: False
