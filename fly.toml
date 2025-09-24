@@ -1,0 +1,24 @@
+app = "autono-snowflake-mcp"
+primary_region = "iad"
+
+[build]
+  dockerfile = "docker/server/Dockerfile"
+
+[http_service]
+  internal_port = 9000
+  force_https = true
+  auto_stop_machines = false
+  min_machines_running = 1
+  processes = ["app"]
+
+[env]
+  # You can change this endpoint if desired; it must match the server `--endpoint`.
+  SNOWFLAKE_MCP_ENDPOINT = "/snowflake-mcp"
+
+# Uncomment to override the container CMD instead of editing the Dockerfile.
+# cmd = [
+#   "mcp-server-snowflake",
+#   "--service-config-file", "/app/services/tools_config.yaml",
+#   "--transport", "streamable-http",
+#   "--endpoint", "/snowflake-mcp"
+# ]

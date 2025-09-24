@@ -576,6 +576,16 @@ def get_login_params() -> dict:
             os.getenv("SNOWFLAKE_PASSWORD") or os.getenv("SNOWFLAKE_PAT"),
             "Password for the user.",
         ],
+        "database": [
+            "--database",
+            os.getenv("SNOWFLAKE_DATABASE"),
+            "Default database for the session.",
+        ],
+        "schema": [
+            "--schema",
+            os.getenv("SNOWFLAKE_SCHEMA"),
+            "Default schema for the session.",
+        ],
         "role": [
             "--role",
             os.getenv("SNOWFLAKE_ROLE"),
